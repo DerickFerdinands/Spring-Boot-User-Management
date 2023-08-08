@@ -15,31 +15,28 @@ public class UserController {
 
     @GetMapping()
     public ResponseUtil getAllUsers() {
-        return new ResponseUtil("200", userService.getAllUsers().toArray());
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
     public ResponseUtil getAllUser(@PathVariable int id) {
-        return new ResponseUtil("200", userService.getUserById(id));
+        return userService.getUserById(id);
     }
 
     @PostMapping
-    public ResponseUtil createUser(@RequestBody UserDTO user) {
-        System.out.println("User" + user);
-        userService.addUser(user);
-        return new ResponseUtil("200", "success");
+    public ResponseUtil createUser(@ModelAttribute UserDTO user) {
+        return userService.addUser(user);
     }
 
     @PutMapping
     public ResponseUtil updateUser(@RequestBody UserDTO user) {
-        userService.updateUser(user);
-        return new ResponseUtil("200", "success");
+        return userService.updateUser(user);
     }
 
     @DeleteMapping("/{id}")
     public ResponseUtil deleteUser(@PathVariable int id) {
-        userService.deleteUser(id);
-        return new ResponseUtil("200", null);
+        return userService.deleteUser(id);
+
     }
 
 }
